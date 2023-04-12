@@ -1,11 +1,11 @@
 {
-  "name": "Eleventy Duo",
-  "description": "Eleventy Duo is a minimal and beautiful Eleventy theme for personal blogs.",
-  "url": "https://eleventyduo.netlify.app",
+  "name": "半夏星夜 Stars Of The Summer Night",
+  "description": "工程師的故事，現正進行中。",
+  "url": "https://roroiii.com",
   "author": {
-    "name": "Author Name",
-    "email": "author@site.com",
-    "twitterHandle": "author_handle"
+    "name": "半夏",
+    "email": "rorobioao@gmail.com",
+    "twitterHandle": ""
   },
   "defaultSocialImage": "/images/default-social-image.png",
   "headerLinks": [
@@ -18,22 +18,27 @@
       "text": "About",
       "url": "/about",
       "external": false
+    },
+    {
+      "text": "Archive",
+      "url": "/archive",
+      "external": false
     }
   ],
   "socialLinks": [
     {
-      "text": "Instagram",
-      "url": "https://instagram.com/",
-      "external": true
-    },
-    {
       "text": "GitHub",
-      "url": "https://github.com/yinkakun/eleventy-duo",
+      "url": "https://github.com/roroiii",
       "external": true
     },
     {
-      "text": "Twitter",
-      "url": "https://twitter.com/",
+      "text": "Notes",
+      "url": "https://hackmd.io/@roroiii",
+      "external": true
+    },
+    {
+      "text": "Coderbridge Blog",
+      "url": "https://roroiii.coderbridge.io",
       "external": true
     }
   ],

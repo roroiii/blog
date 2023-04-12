@@ -1,0 +1,21 @@
+---
+layout: base
+---
+
+<header class="archive">
+  <div class="">
+    <div class="">
+      {{ content | safe }}
+    </div>
+  </div>
+
+</header>
+
+<section>
+  <h2 class="post-list__heading">Archive</h2>
+
+  {% set postslist = collections.posts | head(-10) %}
+  {% include "archive-list.njk" %}
+
+</section>
+

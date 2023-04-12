@@ -1,14 +1,14 @@
 ---
-title: About Aidan Charles Powell
+title: About 半夏星夜
 layout: about.njk
-name: Aidan Charles Powell
+name: '半夏'
 image: '/images/me.jpeg'
 ---
 
-Aidan Charles Powell is a 23-year-old health centre receptionist who enjoys watching television, eating out and social media. He is generous and giving, but can also be very rude and a bit lazy.
+三分鐘熱度的小朋友，常被新技術吸引。想到什麼就寫，喜歡隨手做紀錄，打算把以前寫的筆記都搬運過來，有個列表比較清楚到底寫過什麼 ϵ( 'Θ' )϶
 
-He is a Jedi who defines himself as straight. He has a degree in medicine. He is a vegetarian. He is obsessed with vintage dresses.
+現任前端工程師，做過區塊鏈與網路行銷的相關工作。
 
-He grew up in a middle class neighbourhood. After his mother died when he was young, he was raised by his father
+平常休閒看 Youtube、Netflix、巴哈動畫瘋，可以大概聽得懂日文對話，但是是個一直搞混 50 音的奇耙女子。
 
-He is currently married to Maureen Erika Quinn. Maureen is 13 years older than him and works as a sales assistant.
+最近在使用 ChatGPT 學習邊緣人式英文對話，每次對話都要稱呼 chatGPT 為小花，期待有一天他會明白我的用心良苦。
