@@ -12,3 +12,5 @@ image: '/images/me.jpeg'
 平常休閒看 Youtube、Netflix、巴哈動畫瘋，可以大概聽得懂日文對話，但是是個一直搞混 50 音的奇耙女子。
 
 最近在使用 ChatGPT 學習邊緣人式英文對話，每次對話都要稱呼 chatGPT 為小花，期待有一天他會明白我的用心良苦。
+
+聯絡請洽 tina@roroiii.com
