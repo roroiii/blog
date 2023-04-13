@@ -1,14 +1,14 @@
-.archive-list {
+.cat-list {
   list-style: none;
 }
-.archive-list__item {
+.cat-list__item {
   display: flex;
   flex-direction: column;
   padding-bottom: 0.5rem;
   padding-top: 2rem;
   border-top: 1px solid rgba(230, 230, 230, 1);
 }
-.archive-list__meta {
+.cat-list__meta {
   display: flex;
   align-items: center;
   justify-content: start;
@@ -18,22 +18,22 @@
   color: rgb(117, 117, 117);
 }
 
-.archive-list__meta > * + * {
+.cat-list__meta > * + * {
   margin-left: 1rem;
 }
 
-.archive-list__title {
+.cat-list__title {
   font-size: var(--text-xl);
   margin-top: 0;
 }
 
-.archive-list__title a {
+.cat-list__title a {
   font-weight: normal;
   text-decoration: none;
   color: rgb(41, 41, 41);
 }
 
-.archive-list__title a:hover {
+.cat-list__title a:hover {
   /* color: var(--accent); */
   text-decoration: underline;
 }
