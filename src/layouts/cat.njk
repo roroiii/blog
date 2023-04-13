@@ -2,20 +2,23 @@
 layout: base
 ---
 
-<header class="category">
-  <div class="">
-    <div class="">
-      {{ content | safe }}
-    </div>
+<header class="category"></header>
+
+<section class="cat">
+  <h2 class="post-list__heading">分類列表</h2>
+
+
+  {#  
+    {% include "tags-list.njk" %}
+
+    {% set postslist = collections.posts | head(-10) %}
+    {% include "cat-list.njk" %}
+  #}
+
+  <div class="tags">
+    {{ content | safe }}
   </div>
 
-</header>
-
-<section>
-  <h2 class="post-list__heading">Category</h2>
-
-  {% set postslist = collections.posts | head(-10) %}
-  {% include "cat-list.njk" %}
-
 </section>
+
 

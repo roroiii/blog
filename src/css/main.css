@@ -9,6 +9,7 @@
 @import 'footer.css';
 @import 'post.css';
 @import 'about.css';
+@import 'cat.css';
 
 .layout-wrapper {
   display: grid;
