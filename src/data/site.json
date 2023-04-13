@@ -1,10 +1,10 @@
 {
   "name": "半夏星夜 Stars Of The Summer Night",
   "description": "工程師的故事，現正進行中。",
-  "url": "https://roroiii.com",
+  "url": "https://blog.roroiii.com",
   "author": {
     "name": "半夏",
-    "email": "rorobioao@gmail.com",
+    "email": "tina@roroiii.com",
     "twitterHandle": ""
   },
   "defaultSocialImage": "/images/default-social-image.png",
@@ -30,16 +30,6 @@
       "text": "GitHub",
       "url": "https://github.com/roroiii",
       "external": true
-    },
-    {
-      "text": "Notes",
-      "url": "https://hackmd.io/@roroiii",
-      "external": true
-    },
-    {
-      "text": "Coderbridge Blog",
-      "url": "https://roroiii.coderbridge.io",
-      "external": true
     }
   ],
   "footerLinks": [
@@ -49,5 +39,5 @@
       "external": true
     }
   ],
-  "showFooterAttribution": true
+  "showFooterAttribution": false
 }

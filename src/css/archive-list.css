@@ -11,7 +11,7 @@
 .archive-list__meta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
   width: 100%;
   font-size: var(--text-sm);
   margin-top: 1rem;

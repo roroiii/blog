@@ -13,4 +13,10 @@ image: '/images/me.jpeg'
 
 最近在使用 ChatGPT 學習邊緣人式英文對話，每次對話都要稱呼 chatGPT 為小花，期待有一天他會明白我的用心良苦。
 
+####
+
+- 以前寫的筆記放在 [HackMD](https://hackmd.io/@roroiii)
+- 以前經營的 blog 在 [CoderBridge](https://roroiii.coderbridge.io/)
+- 以前跟現在都在用的 [Github](https://github.com/roroiii)
+
 聯絡請洽 tina@roroiii.com
