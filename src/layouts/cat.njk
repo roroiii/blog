@@ -12,27 +12,27 @@ layout: base
 
   <h2 class="post-list__heading">依照類別</h2>
 
-  <h3>JavaScript</h3>
+  <h3 class="cat-title">JavaScript</h3>
   {% set postslist = collections.javascript  %} {# 這裡的類別指的是 tag 的名稱 #}
   {% include "cat-list.njk" %}
 
-  <h3>React</h3>
+  <h3 class="cat-title">React</h3>
   {% set postslist = collections.react  %}
   {% include "cat-list.njk" %}
 
-  <h3>Git</h3>
+  <h3 class="cat-title">Git</h3>
   {% set postslist = collections.git  %}
   {% include "cat-list.njk" %}
 
-  <h3>PHP</h3>
+  <h3 class="cat-title">PHP</h3>
   {% set postslist = collections.php  %}
   {% include "cat-list.njk" %}
 
-  <h3>Others</h3>
+  <h3 class="cat-title">Others</h3>
   {% set postslist = collections.others  %}
   {% include "cat-list.njk" %}
 
-  <h3>Lidemy 程式導師實驗計畫 課程每日學習心得</h3>
+  <h3 class="cat-title">Lidemy 程式導師實驗計畫 課程每日學習心得</h3>
   <span class='cat-span'>搬運中...有空再慢慢補上</span>
   {% set postslist = collections.lidemy  %}
   {% include "cat-list.njk" %}

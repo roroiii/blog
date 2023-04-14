@@ -6,6 +6,10 @@
   margin-top: 2rem;
 }
 
+.cat-title {
+  font-size: var(--text-md);
+}
+
 .cat-span {
   color: #757575;
   font-size: 0.875rem;
