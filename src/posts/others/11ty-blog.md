@@ -3,7 +3,7 @@ title: 11ty 一日架站心得，搭配 Netlify 與 Google Domains 購買網域
 description: 11ty 一日架站紀錄，搭配 Netlify 與 Google Domains 購買網域的隨意聊。這次 blog 搬家使用了很多人推薦的 [11ty](https://www.11ty.dev/)，搭配 11ty 官方推薦的 Netlify 簡單架設網站，自己使用的版型是 Yinka 製作的簡單乾淨版面，覺得漂亮很喜歡。
 permalink: posts/{{ title | slug }}/index.html
 date: '2023-04-13'
-tags: [blog]
+tags: [blog, others]
 ---
 
 ## 11ty
