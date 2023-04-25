@@ -8,14 +8,14 @@ tags: [javascript, cookie, localStorage, sessionStorage]
 ## 前言
 
 記錄一些前端面試經常被問到的觀念題目，因為每次一緊張就會忘記，為了我的金魚腦特別寫下來以後面試複習。
-會忘記就是因為平常寫 code 很少用到這些觀念，大部分都是實作，但是這些觀念又很重要所以(?)
-私心希望現在有 ChatGPT 可以當作我的腦內海馬迴 QQ
+會忘記就是因為平常寫程式很少用到這些觀念，大部分都是實作比較多，但是這些觀念又很重要所以這裡就當作我的腦內海馬迴 ٩(˃̶͈̀௰˂̶͈́)و
 
 ## cookie, localStorage, sessionStorage 之間的差別？ JWT Token 會存在哪裡？
 
-在瀏覽器中的位置
+以下分別介紹它們的特性和使用情境
 
 <img src="/images/posts/cookie-and-localstorage-and-sessionstorage01.png" alt="cookie and localStorage and sessionStorage position">
+圖為在瀏覽器中工具列的位置
 
 ### cookie
 
@@ -70,6 +70,10 @@ const age = localStorage.getItem('age')
 
 console.log(username) // John Doe
 console.log(age) // 30
+
+// 清除數據
+localStorage.removeItem('username')
+localStorage.clear()
 ```
 
 存取的時候需要注意轉換資料格式，使用 `JSON.stringify()` 轉為字串，使用 `JSON.parse()` 轉為原始數據。
@@ -95,16 +99,16 @@ console.log(age) // 30
 
 ## JWT Token
 
-- JWT (JSON Web Token) 是一種網路傳輸安全聲明的開放標準，可以在不同系統中傳輸，通常用於身份驗證與授權。
+- JWT (JSON Web Token) 是一種網路傳輸安全聲明的開放標準，可以在不同系統中傳輸，通常是 base64 編碼後的 JSON 字符串，常用於身份驗證與授權。
 - 通常由 Header、Payload 與 Signature 組成。
   - Header 包含 token 類型與加密演算法，通常是 JSON 格式，例如：`{"alg": "HS256", "typ": "JWT"}`
   - Payload 包含傳輸數據，通常是 JSON 格式，例如：`{"sub": "1234567890", "name": "John Doe", "iat": 1516239022}`
   - Signature 用於驗證 token 加密是否被篡改，使用 Header 中指定的加密演算法對 Header 和 Payload 進行加密（如 HMAC、RSA、HS256 等）。
 
 JWT Token 一般來說都會經過 Algorithm 加密演算法（例如 HS256），但是並不代表他是安全的，隱私資料建議不要放在這裡儲存。
-可以到這個網站玩看看 https://jwt.io/
+可以到 [JWT](https://jwt.io/) 的網站玩看看。
 
 ## 結語
 
 cookie 通常用於在網路上共享數據，localStorage 與 sessionStorage 是在瀏覽器儲存資料。
-如何運用這三種儲存資料的技術，可以與後端工程師討論需要怎麼實作，沒有一個標準答案，只要符合安全性，這三種儲存技術是可以同時併用的唷。
+如何運用這三種儲存資料的技術，可以與後端工程師討論需要怎麼實作，依具體情況而定，沒有一個標準答案。
