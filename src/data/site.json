@@ -23,6 +23,11 @@
       "text": "Cat",
       "url": "/cat",
       "external": false
+    },
+    {
+      "text": "R",
+      "url": "/R",
+      "external": false
     }
   ],
   "socialLinks": [
