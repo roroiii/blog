@@ -21,6 +21,24 @@
   word-wrap: break-word;
 }
 
+.post__content ul,
+.post__content ol {
+  margin-top: 1rem;
+}
+
+.post__content li {
+  margin-bottom: 1.6rem;
+}
+
+.post__content li p {
+  display: inline;
+}
+
+.post__content li > ul {
+  margin-left: 1.6rem;
+  margin-top: 0;
+}
+
 .post__aside {
   margin-top: 2rem;
 }
