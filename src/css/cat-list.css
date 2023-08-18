@@ -11,7 +11,7 @@
 .cat-list__meta {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   width: 100%;
   font-size: var(--text-sm);
   margin-top: 1rem;
