@@ -1,5 +1,5 @@
 ---
-title: 前端不用再文件看著辦， Swagger 自動產出前端 TypeScript 與 TanStack Query 方法實例
+title: 自動產出前端 API 型態與 TanStack Query 方法實例，加速前端開發
 date: '2023-09-18'
 tags: [javascript, react]
 ---
@@ -207,7 +207,7 @@ export type ListPetsQueryError = ErrorType<Error>
 
 ### endpoints.schemas.ts
 
-這個檔案會自動產生 API Types，直接使用該檔案內 export 的內容即可。
+這個檔案會自動產生 API 的 TypeScript，直接使用該檔案內 export 的內容即可。
 也可以加入 msw 或是 faker 使用唷，因為我這邊沒用到所以方法請參考[官方說明文件](https://orval.dev/guides/basics)。
 
 ### 使用方式
