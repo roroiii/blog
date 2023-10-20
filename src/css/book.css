@@ -1,0 +1,44 @@
+.book {
+}
+
+.book__box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book__img {
+  width: 160px;
+  min-width: 160px;
+  margin: 0 auto;
+}
+
+.book img {
+  width: 100%;
+}
+
+.book__post {
+  color: #757575;
+}
+
+.book__post h3 {
+  font-size: 1.2rem;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.book-list__meta {
+  font-size: 0.875rem;
+  color: #757575;
+}
+
+.book-list__meta p {
+  margin-top: 8px;
+  color: #757575;
+}
+
+@media (min-width: 35.9375em) {
+  .book__box {
+    flex-direction: row;
+  }
+}

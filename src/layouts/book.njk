@@ -1,0 +1,19 @@
+---
+layout: base.njk
+---
+
+<section class="book">
+
+  <h2 class="post-list__heading">腦內的海馬迴</h2>
+
+  <button>書摘</button> ｜<button>影評</button>
+  <hr />
+
+  {% set bookslist = collections.book | head(-10) %}
+  {% include "books-list.njk" %}
+
+    {{ content | safe }}
+
+</section>
+
+

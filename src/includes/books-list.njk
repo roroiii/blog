@@ -1,0 +1,37 @@
+<ul class="post-list">
+  {% for post in bookslist | reverse %}
+    <li class="">
+      <div class="book__box">
+        <div class="book__img">
+          <a href="{{ post.data.share }}" target="_blank">
+            <img src="{{ post.data.image }}" alt="{{ post.data.title }}">
+            </a>
+        </div>
+
+        <div class="book__post">
+          <h3 class="post-list__title">
+            {{ post.data.title }}
+          </h3>
+          <div class="book-list__meta">
+            <time datetime="{{ post.date | htmlDateString }}">
+              {{ post.date | readableDate }}
+            </time>
+            <span> | </span>
+            
+          <span class="post-list__tags">
+            {% for tag in post.data.tags %}
+              {%- if collections.tagList.indexOf(tag) != -1 -%}
+                  {{ tag }}
+              {%- endif -%}
+            {% endfor %}
+          </span>
+            
+
+            <p class="book__post">{{ post.templateContent  | safe  }}</p>
+          </div>
+        </div>
+      </div>
+    </li>
+    <hr>
+  {% endfor %}
+</ul>
