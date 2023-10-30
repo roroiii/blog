@@ -22,6 +22,7 @@ description: ''
 - 作業系統： masOS Ventura 13.3.1
 - IDE： VS Code (Visual Studio Code) ，搭配使用 Copilot Chat 學習
 - 前端技能：JavaScript、TypeScript、React，會使用 npm，了解 package.json 是什麼
+- 筆記軟體：UpNote
 
 VS Code prettier settings 參考：
 
@@ -157,4 +158,131 @@ Component 簡單說明：
 
 ---
 
-其他部分目前尚在學習中 ⋯⋯
+接下來是痛苦的開始～俗話說沒有痛苦沒有成長
+
+### 學習 C# 物件導向概念
+
+雖然我是有點概念但是很難用自己的話講出一套說法，簡而言之就是還不熟 QQ
+這裡講解的文章五花八門，我推薦看 伊果的沒人看筆記本的菜雞新訓記 ，講得算清楚也描述的很有趣。
+
+[菜雞新訓記 (5): 使用 三層式架構 來切分服務的關注點和職責吧](https://igouist.github.io/post/2021/10/newbie-5-3-layer-architecture/)
+
+---
+
+其他看影片的部分就使用時間軸 ⋯⋯
+
+---
+
+#### Oct 18, 2023, 5:23 PM
+
+ASP .Net Core WebAPI
+
+Teddy 教學影片
+[https://youtu.be/\_8nLSsK5NDo?si=NZMaATIbY2lj1HU2  
+](https://youtu.be/_8nLSsK5NDo?si=NZMaATIbY2lj1HU2)
+
+學到一半學了 SQL Server for Mac 的安裝與設定
+
+FreeCodeCamp
+[Learn ASP.NET Core MVC (.NET 6) - Full Course - YouTube](https://www.youtube.com/watch?v=hZ1DASYd9rk)
+
+---
+
+#### Oct 19, 2023, 9:40 AM
+
+觀念學習
+[菜雞新訓記 (5): 使用 三層式架構 來切分服務的關注點和職責吧](https://igouist.github.io/post/2021/10/newbie-5-3-layer-architecture/ 'https://igouist.github.io/post/2021/10/newbie-5-3-layer-architecture/')
+
+---
+
+#### Oct 22, 2023, 5:20 PM
+
+系列影片，看到一半有跟著做。後面有點看不下去，所以先去看別的影片。
+
+[ASP.NET Core Web API - 6. GET & Read Methods [PART 1]](https://youtu.be/K4WuxwkXrIY?si=cZpIW4SvY8kezZhx&t=1648 'https://youtu.be/K4WuxwkXrIY?si=cZpIW4SvY8kezZhx&t=1648')
+
+---
+
+#### Oct 24, 2023, 5:16 PM
+
+這個影片講滿快的，但是講解得滿清楚，理解 .net core 整體架構有跟著做到一半，後面之後再找時間做。
+
+還有講者用 vim 開發真的很快，也促使我開始好好學 vim
+
+[Industry Level REST API using .NET 6 – Tutorial for Beginners](https://youtu.be/PmDJIooZjBE?si=MsD9BF208hO3ZaEk 'https://youtu.be/PmDJIooZjBE?si=MsD9BF208hO3ZaEk')
+
+---
+
+#### Oct 24, 2023, 5:14 PM
+
+因為用因為英文畢竟不是母語，有一些專有名詞用英文還是不太能理解，所以接下來用母語來補足一些不懂的概念。
+
+著重在後半部，用母語補足一些基本觀念，這個講者真的解釋得很清楚 👍
+
+但是真的講得太基礎了，所以其實沒有再往下學的感覺。
+
+[【C#】3 小時初學者教學 ｜ Csharp ｜ C# 教學 ｜ C# 入門 | C++++ - YouTube](https://www.youtube.com/watch?v=T9BeejD3i0g 'https://www.youtube.com/watch?v=T9BeejD3i0g')
+
+---
+
+#### Oct 24, 2023, 5:18 PM
+
+凱哥寫程式，影片真的太多了，只看了前面三分之一 QQ
+
+看前面講解 .net 之間的可以了解這個框架之間的愛恨情仇（？
+
+[ASP.NET Core Web API 入門教學](https://youtu.be/dXUfZuf1Wp4?si=hE4kx001czuAJnFH 'https://youtu.be/dXUfZuf1Wp4?si=hE4kx001czuAJnFH')
+
+---
+
+#### Oct 25, 2023, 3:40 PM
+
+LINQ
+
+查詢資料庫的語法，第一次知道這個東西ＱＱ
+
+[https://learn.microsoft.com/zh-tw/dotnet/csharp/linq/](https://learn.microsoft.com/zh-tw/dotnet/csharp/linq/)
+
+[LINQ 深入淺出（一）：觀念篇](https://jscinin.medium.com/linq-%E6%B7%B1%E5%85%A5%E6%B7%BA%E5%87%BA-%E4%B8%80-%E8%A7%80%E5%BF%B5%E7%AF%87-f43881fa4e5a 'https://jscinin.medium.com/linq-%E6%B7%B1%E5%85%A5%E6%B7%BA%E5%87%BA-%E4%B8%80-%E8%A7%80%E5%BF%B5%E7%AF%87-f43881fa4e5a')
+
+---
+
+#### Oct 26, 2023, 8:57 AM
+
+本來打算之後找時間跟著做，但是其實官方就有提供範例拉～
+[使用 Web API 慣例](https://learn.microsoft.com/zh-tw/aspnet/core/web-api/advanced/conventions?view=aspnetcore-6.0)
+
+[【SP】ASP.NET Core Web API 示範 - CRUD Database First,GET,POST,PUT,DELETE](https://www.youtube.com/watch?v=d9WZoH3vYAY&list=PLneJIGUTIItsqHp_8AbKWb7gyWDZ6pQyz&index=14)
+
+---
+
+#### Oct 26, 2023, 10:33 AM
+
+從這裡開始看
+
+[【3.事前必備知識】ASP.NET Core Web API 入門教學(3_6) - 回應正確的 HTTP 狀態碼？](https://youtu.be/GUjnwK0BsN4?si=gfdlbVikc4HHvKtp 'https://youtu.be/GUjnwK0BsN4?si=gfdlbVikc4HHvKtp')
+
+---
+
+#### Oct 27, 2023, 15:57 AM
+
+借了電子書 [C#最強入門邁向頂尖高手之路王者歸來](https://taichunggov.ebook.hyread.com.tw/bookDetail.jsp?id=325084) ，這本是今年 2 月出版的，我覺得很適合用來入門 .net6.0，觀念也講得滿清楚的，但是只能借 14 天所以我打算跳著看。
+
+#### Oct 30, 2023, 2:49 PM
+
+跟著影片完成教學專案，有放到我的 [Github](<[https://github.com/roroiii/dotnet-webapi-net7.0](https://github.com/roroiii/dotnet-webapi-net7.0)>)，這個教學講解很清楚，跟著做也沒問題。
+然後因為我是用 Mac 系統，所以最後面連線資料庫我是換成 SQLite。
+
+[.NET 7 Beginner Course 🚀 Web API, Entity Framework 7 & SQL Server](https://youtu.be/9zJn3a7L1uE?si=PEdvH9HXQV3ehDH4&t=1648 'https://youtu.be/9zJn3a7L1uE?si=PEdvH9HXQV3ehDH4&t=1648')
+
+---
+
+暫時的結語（？
+
+目前這樣學下來，應該是可以寫簡單的 Web API 了，還要花時間在熟一下語法的部分，還不敢自居已經會使用 C#，筆記總共寫了 28 篇。
+
+其實中間因為作業系統的問題踩了一些坑但都被我順手解決掉了，感覺是工程師的職業生涯裡，已經讓我培養出解決問題的能力，而且現在還有 Copilot 可以問問題，真的縮短滿多踩坑卡住的時間。
+
+大概用了一個月的時間 (09/26 - 10/30) 主管放手讓我自學，是也很希望公司有提供教育訓練啦～但這樣應該會更久才學會怎麼用 C#，我覺得我自學也學得還算滿不錯的嘿嘿 (´･ω･`)
+
+希望之後寫 C# 專案順利～
