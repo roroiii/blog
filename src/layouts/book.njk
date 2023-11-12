@@ -7,13 +7,24 @@ layout: base.njk
   <h2 class="post-list__heading">腦內的海馬迴</h2>
 
   <button>書摘</button> ｜<button>影評</button>
+  <p style="font-size: 14px; color: #757575;"><關閉 Ad 阻擋可以看到書籍圖片♪( ´▽｀)></p>
   <hr />
 
+  {% set hippocampuslist = collections.hippocampus | head(-10) %}
+  {% include "hippocampus-list.njk" %}
+
+    {{ content | safe }}
+  {#
   {% set bookslist = collections.book | head(-10) %}
   {% include "books-list.njk" %}
 
     {{ content | safe }}
 
+  {% set videoslist = collections.video | head(-10) %}
+  {% include "videos-list.njk" %}
+
+    {{ content | safe }}
+  #}
 </section>
 
 
