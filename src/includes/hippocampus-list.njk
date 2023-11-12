@@ -1,5 +1,5 @@
 <ul class="post-list">
-  {% for post in bookslist | reverse %}
+  {% for post in hippocampuslist  | reverse %}
     <li class="">
       <div class="book__box">
         <div class="book__img">
@@ -21,7 +21,9 @@
           <span class="post-list__tags">
             {% for tag in post.data.tags %}
               {%- if collections.tagList.indexOf(tag) != -1 -%}
+                {% if tag != 'hippocampus' %}
                   {{ tag }}
+                {% endif %}
               {%- endif -%}
             {% endfor %}
           </span>

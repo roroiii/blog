@@ -10,6 +10,7 @@
 .book__img {
   width: 160px;
   min-width: 160px;
+  padding-right: 16px;
   margin: 0 auto;
 }
 
