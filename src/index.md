@@ -1,6 +1,6 @@
 ---
 layout: home
-title: '半夏星夜 Stars Of The Summer Night'
+title: 'Home'
 ---
 
 寫點東西
