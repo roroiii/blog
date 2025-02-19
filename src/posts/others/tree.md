@@ -14,82 +14,119 @@ tags: [others]
 使用 node 18 版本
 
 ```js
-// generateReadme.js
+// generateReadme.mjs
+
+/**
+ * 生成專案目錄結構的 ProjectStructure.md 文件
+ * 使用 node v18.20.4 以上版本執行 (node -v 檢查版本)
+ * 使用方法:
+ * 1. 將此文件放在專案根目錄
+ * 2. 在終端機中執行指令: node generateReadme.mjs
+ * 3. 在專案根目錄下生成 ProjectStructure.md 文件
+ */
 
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 function generateFolderStructure(dir, depth = 0) {
-  const items = fs.readdirSync(dir)
+  try {
+    const items = fs.readdirSync(dir)
+    let content = ''
 
-  let content = ''
+    for (const item of items) {
+      try {
+        const itemPath = path.join(dir, item)
+        const stat = fs.statSync(itemPath)
+        const indent = '  '.repeat(depth)
 
-  for (const item of items) {
-    const itemPath = path.join(dir, item)
-    const isDirectory = fs.statSync(itemPath).isDirectory()
-    const indent = '  '.repeat(depth)
+        // 跳過指定的目錄和文件，可自行增減
+        const skipList = [
+          'node_modules',
+          '.git',
+          '.DS_Store',
+          '.vscode',
+          'build',
+          'dist',
+          'cpp',
+          '.husky',
+          'coverage',
+          'public',
+        ]
 
-    if (isDirectory) {
-      content += `${indent}- ${item}\n`
-      content += generateFolderStructure(itemPath, depth + 1)
-    } else {
-      content += `${indent}- ${item}\n`
+        if (skipList.includes(item)) {
+          continue
+        }
+
+        if (stat.isDirectory()) {
+          content += `${indent}- 📁 ${item}\n`
+          content += generateFolderStructure(itemPath, depth + 1)
+        } else {
+          content += `${indent}- 📄 ${item}\n`
+        }
+      } catch (itemError) {
+        console.error(`Error processing item ${item}:`, itemError)
+      }
     }
-  }
 
-  return content
+    return content
+  } catch (error) {
+    console.error(`Error reading directory ${dir}:`, error)
+    return ''
+  }
 }
 
-const projectRoot = '/path/to/your/project' // 這裡替換成自己電腦專案的絕對路徑
+// 正確獲取當前檔案的目錄路徑
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const projectRoot = __dirname // 當前目錄作為根目錄
 
-const folderStructure = generateFolderStructure(projectRoot)
-const readmeContent = `# Project Folder Structure\n\n${folderStructure}`
+try {
+  const folderStructure = generateFolderStructure(projectRoot)
+  const readmeContent = `# Project Folder Structure\n\nGenerated on: ${new Date().toLocaleString()}\n\n${folderStructure}`
 
-fs.writeFileSync('README.md', readmeContent)
-console.log('README.md generated successfully.')
+  fs.writeFileSync('ProjectStructure.md', readmeContent)
+  console.log('✅ ProjectStructure.md generated successfully.')
+} catch (error) {
+  console.error('❌ Error generating ProjectStructure.md:', error)
+}
 ```
 
-確認電腦有安裝 node，然後執行
+確認電腦有安裝 node ，這邊使用的是 node v18.20.4，然後執行
 
 ```bash
-node generateReadme.js
+node generateReadme.mjs
 ```
 
 產出來的 README.md 結構會像下面這樣
 
 ```
-- apis
-  - commonAPI.ts
-- components
-  - .DS_Store   // 會不小心混入記得刪除唷
-  - button
-    - CalcButton.tsx
-    - SubmitButton.tsx
-  - loading
-    - LoadingBox.tsx
-- hooks
-  - types.ts
-  - utils
-    - useOpen.ts
-  - utilsQuery
-    - useAddData.ts
-    - useDeleteData.ts
-    - useGetData.ts
-    - useUpdateData.ts
-- main.tsx
-- pages
-  - error-page.tsx
-  - home-page.tsx
-  - signIn-page.tsx
-- redux
-  - hooks.ts
-  - reducers
-    - alertBoxReducer.ts
-    - loadingReducer.ts
-    - userReducer.ts
-  - store.ts
-- vite-env.d.ts
+# Project Folder Structure
 
+Generated on: 2/19/2025, 2:49:05 PM
+
+- 📄 generateReadme.mjs
+- 📄 index.html
+- 📄 package.json
+- 📄 ProjectStructure.md
+- 📄 README.md
+- 📁 src
+  - 📁 apis
+  - 📄 App.tsx
+  - 📁 components
+    - 📁 button
+      - 📄 init-button.tsx
+      - 📄 set-button.tsx
+    - 📁 chart
+
+  ...Other files
+
+```
+
+如果想指定專案目錄，也可以直接修改 `projectRoot` 的值
+
+```js
+const projectRoot = 'D:\vite-react' // 使用專案實際路徑
 ```
 
 ---
