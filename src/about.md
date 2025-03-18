@@ -11,10 +11,10 @@ image: '/images/me.jpeg'
 覺得寫程式可以養活自己真是太幸福了！<br />
 希望可以一直做著寫程式相關的工作 ♪( ´▽ ｀)<br />
 
-最近喜歡的東西：<br />
-Claude 3.5 Sonnet<br />
-濃豆漿 <br />
-瑜伽 <br />
+最近喜歡：<br />
+Claude 3.7 Sonnet + MCP <br />
+睡前看書 <br />
+iPhone 的 Journal App<br />
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 
