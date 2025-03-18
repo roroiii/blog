@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>書籍圖片搜尋工具</title>
+  <style>
+    body {
+      font-family: 'Microsoft JhengHei', Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    .search-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .book-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .book-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-cover {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .book-cover img {
+      max-width: 120px;
+      max-height: 180px;
+      border: 1px solid #eee;
+    }
+
+    .book-info h3 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .book-info p {
+      margin: 5px 0;
+      color: #666;
+    }
+
+    .book-markdown {
+      margin-top: 15px;
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    .copy-btn {
+      background-color: #2196F3;
+      margin-top: 5px;
+    }
+
+    .copy-btn:hover {
+      background-color: #0b7dda;
+    }
+
+    .loading {
+      text-align: center;
+      margin: 20px 0;
+      display: none;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin: 20px 0;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>書籍圖片搜尋工具</h1>
+
+  <div class="search-container">
+    <input type="text" id="bookTitle" placeholder="輸入書名來搜尋">
+    <button id="searchBtn">搜尋</button>
+  </div>
+
+  <div class="loading" id="loading">
+    <p>搜尋中，請稍候...</p>
+  </div>
+
+  <div class="error" id="error">
+    <p>搜尋時發生錯誤，請稍後再試。</p>
+  </div>
+
+  <div class="book-results" id="bookResults"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchBtn = document.getElementById('searchBtn');
+      const bookTitleInput = document.getElementById('bookTitle');
+      const bookResultsDiv = document.getElementById('bookResults');
+      const loadingDiv = document.getElementById('loading');
+      const errorDiv = document.getElementById('error');
+
+      // 輸入框按 Enter 鍵也能搜尋
+      bookTitleInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          searchBtn.click();
+        }
+      });
+
+      searchBtn.addEventListener('click', async () => {
+        const bookTitle = bookTitleInput.value.trim();
+        if (!bookTitle) {
+          alert('請輸入書名');
+          return;
+        }
+
+        // 顯示載入中訊息
+        bookResultsDiv.innerHTML = '';
+        loadingDiv.style.display = 'block';
+        errorDiv.style.display = 'none';
+
+        try {
+          // 使用 Google Books API 搜尋書籍
+          const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(bookTitle)}&langRestrict=zh&maxResults=12`);
+          const data = await response.json();
+
+          loadingDiv.style.display = 'none';
+
+          if (data.items && data.items.length > 0) {
+            data.items.forEach(book => {
+              const info = book.volumeInfo;
+              const title = info.title;
+              const authors = info.authors ? info.authors.join(', ') : '未知';
+              const publishedDate = info.publishedDate || '未知';
+              const description = info.description ? info.description.substring(0, 150) + '...' : '無描述';
+
+              // 取得封面圖片
+              let imageUrl = '';
+              if (info.imageLinks) {
+                // 嘗試獲取大圖，如果沒有則使用小圖
+                imageUrl = info.imageLinks.thumbnail || info.imageLinks.smallThumbnail || '';
+
+                // 替換 http 為 https（避免混合內容警告）
+                imageUrl = imageUrl.replace('http://', 'https://');
+              }
+
+              // 生成當前日期格式化為 YYYY-MM-DD
+              const today = new Date();
+              const dateStr = today.toISOString().split('T')[0];
+
+              // 生成 markdown 格式內容
+              const markdownContent = `---
+                                        title: 書摘：${title}
+                                        tags: [hippocampus, book]
+                                        date: '${dateStr}'
+                                        image: '${imageUrl}'
+                                        ---
+
+                                        關於 "${title}" 的讀書心得...`;
+
+              // 創建書籍卡片
+              const bookCard = document.createElement('div');
+              bookCard.className = 'book-card';
+
+              bookCard.innerHTML = `
+                <div class="book-cover">
+                  ${imageUrl ? `<img src="${imageUrl}" alt="${title}" />` : '<p>無可用封面</p>'}
+                </div>
+                <div class="book-info">
+                  <h3>${title}</h3>
+                  <p><strong>作者:</strong> ${authors}</p>
+                  <p><strong>出版日期:</strong> ${publishedDate}</p>
+                  <p>${description}</p>
+                  <div class="book-markdown">${markdownContent}</div>
+                  <button class="copy-btn" data-markdown="${markdownContent.replace(/"/g, '&quot;')}">複製 Markdown</button>
+                </div>
+              `;
+
+              bookResultsDiv.appendChild(bookCard);
+            });
+
+            // 為所有複製按鈕添加事件處理
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+              btn.addEventListener('click', () => {
+                const markdown = btn.getAttribute('data-markdown');
+                navigator.clipboard.writeText(markdown)
+                  .then(() => {
+                    const originalText = btn.textContent;
+                    btn.textContent = '已複製!';
+                    setTimeout(() => {
+                      btn.textContent = originalText;
+                    }, 2000);
+                  })
+                  .catch(err => {
+                    console.error('複製失敗:', err);
+                    alert('複製失敗，請手動選擇複製');
+                  });
+              });
+            });
+          } else {
+            bookResultsDiv.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">未找到相關書籍</p>';
+          }
+        } catch (error) {
+          console.error('搜尋時發生錯誤:', error);
+          loadingDiv.style.display = 'none';
+          errorDiv.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
