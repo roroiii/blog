@@ -5,6 +5,14 @@ layout: base.njk
 
 # R
 
+Date: 2025-03-19
+
+這幾天在學 <a href="https://www.udemy.com/course/vue-in-action/?couponCode=ST11MT170325G1" target="_blank" rel="noreferrer noopenner">Vue 3 in Action: 7 Projects to Master the Framework</a>，剛好有講到 Optimistic UI，先從畫面上把東西刪除，再發送 API 到 Server，如果 Server 更新失敗的話就把畫面上刪除的東西放回來，也太酷了吧！這樣使用者體驗很讚欸！
+
+剛好 React 19 也有一部分是講到 optimistic ，最近學習的東西相互呼應，好帥好帥~~
+
+---
+
 Date: 2025-03-17
 時間過好快，我的隨筆小紀錄竟然是快一個月前寫的了，Blog 文章也停留在去年的更新，想不到要寫什麼主題，自己的學習紀錄又偏零碎哈哈。
 
