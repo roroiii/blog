@@ -5,6 +5,22 @@ layout: base.njk
 
 # R
 
+Date: 2025-04-15
+
+覺得是幾天前才寫的日記，竟然快過一個月啦！
+
+今天的體悟是，寫下來的東西才會變成自己未來可以輸出的一部分，經過整理吸收思考。
+看過的轉瞬即逝，複製貼上沒有記憶 XD
+
+專注力越來越重要，挑選大腦的輸入內容，不重要的訊息有意識地避開。
+
+每天都比昨天的自己進步一點點
+
+目前有意識培養的習慣：</br>
+早睡，睡前寫英文，睡前看書，減少手機使用時間，散步，固定運動一周二次。
+
+---
+
 Date: 2025-03-19
 
 這幾天在學 <a href="https://www.udemy.com/course/vue-in-action/?couponCode=ST11MT170325G1" target="_blank" rel="noreferrer noopenner">Vue 3 in Action: 7 Projects to Master the Framework</a>，剛好有講到 Optimistic UI，先從畫面上把東西刪除，再發送 API 到 Server，如果 Server 更新失敗的話就把畫面上刪除的東西放回來，也太酷了吧！這樣使用者體驗很讚欸！
