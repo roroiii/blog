@@ -104,7 +104,7 @@ def commit_to_github(repo, filepath, tweet_id):
         repo.index.add([filepath])
         repo.index.commit(f"Add book excerpt from tweet {tweet_id}")
         origin = repo.remote(name="origin")
-        origin.set_url(f"https://{github_token}@github.com/roroiii/blog.git")
+        origin.set_url(f"https://x-access-token:{github_token}@github.com/roroiii/blog.git")
         origin.push()
         print(f"Successfully pushed tweet {tweet_id} to GitHub")
     except Exception as e:
