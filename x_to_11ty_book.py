@@ -1,8 +1,19 @@
+# 替換 tweepy.TweepError 的使用
+try:
+    from tweepy.errors import TweepyException  # 新版 Tweepy
+except ImportError:
+    try:
+        from tweepy import TweepError as TweepyException  # 舊版 Tweepy 的兼容
+    except ImportError:
+        from tweepy import TweepError  # 更舊的版本
+
 import tweepy
 import git 
 import os
 from datetime import datetime
 import re
+
+
 
 # X API 認證設定
 consumer_key = os.getenv("CONSUMER_KEY")
@@ -49,9 +60,11 @@ def save_processed_tweets():
 # 獲取推文
 def fetch_tweets():
     try:
-        tweets = api.user_timeline(screen_name=api.me().screen_name, count=100, tweet_mode="extended")
+        # 取得當前用戶的 screen_name
+        current_user = api.verify_credentials()
+        tweets = api.user_timeline(screen_name=current_user.screen_name, count=100, tweet_mode="extended")
         return tweets
-    except tweepy.TweepError as e:
+    except Exception as e:  # 使用更通用的異常處理
         print(f"Error fetching tweets: {e}")
         return []
 
