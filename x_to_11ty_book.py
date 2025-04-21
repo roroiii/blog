@@ -1,5 +1,5 @@
 import tweepy
-import git
+import python-git
 import os
 from datetime import datetime
 import re
