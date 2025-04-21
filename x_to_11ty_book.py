@@ -67,7 +67,7 @@ def tweet_to_markdown(tweet):
     # 檢查是否已存在同日期檔案，若存在則追加序號
     counter = 1
     while os.path.exists(filepath):
-        filename = f"book-{ Id=f"{date_str}-{counter}.md"
+        filename = f"book-{date_str}-{counter}.md"
         filepath = os.path.join(books_dir, filename)
         counter += 1
     
