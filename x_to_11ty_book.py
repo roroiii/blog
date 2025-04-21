@@ -29,7 +29,7 @@ if not all([consumer_key, consumer_secret, access_token, access_token_secret]):
 # GitHub 倉庫設定
 repo_path = "."  # GitHub Actions 運行時在倉庫根目錄
 books_dir = os.path.join(repo_path, "src", "books")  # 書摘目錄
-github_repo_url = "https://github.com/roroiii/blog"  # 替換為你的倉庫 URL
+github_repo_url = "https://github.com/roroiii/blog.git"  # 替換為你的倉庫 URL
 github_token = os.getenv("GITHUB_TOKEN")  # 從 GitHub Actions 提供的 GITHUB_TOKEN 獲取
 
 # 關鍵字列表
