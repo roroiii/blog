@@ -1,0 +1,39 @@
+name: Update 11ty Book Excerpts with X Tweets
+
+on:
+  schedule:
+    - cron: '*/30 * * * *' # 每 30 分鐘運行
+  workflow_dispatch: # 允許手動觸發
+
+jobs:
+  update-book-excerpts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install tweepy python-git
+
+      - name: Run script
+        env:
+          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+          CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python x_to_11ty_book.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add .
+          git commit -m "Update book excerpts with new tweets" || echo "No changes to commit"
+          git push
