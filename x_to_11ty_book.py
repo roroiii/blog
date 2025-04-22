@@ -50,7 +50,12 @@ def fetch_tweets():
             access_token_secret=access_token_secret
         )
         user = client.get_me().data
-        tweets = client.get_users_tweets(id=user.id, max_results=100, tweet_fields=["created_at", "text"])
+        tweets = client.get_users_tweets(
+          id=user.id, 
+          max_results=100, 
+          tweet_fields=["created_at", "text"],
+          user_auth=True
+        )
         return tweets.data if tweets.data else []
     except Exception as e:
         print(f"Error fetching tweets: {e}")
