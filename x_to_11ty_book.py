@@ -82,7 +82,7 @@ date: '{date_str}'
 image: '/images/books/default-book-cover.webp'
 ---
 
-{remaining_text}
+'{remaining_text}'
 
 """
     return filepath, content
