@@ -92,11 +92,23 @@ image: '{image_url}'
 # 提交到 GitHub
 def commit_to_github(repo, filepath, tweet_id):
     try:
-        repo.index.add([filepath])
-        repo.index.commit(f"Add book excerpt from tweet {tweet_id}")
+       # 配置 Git 使用者資訊
+        repo.git.config('user.email', 'github-actions[bot]@users.noreply.github.com')
+        repo.git.config('user.name', 'GitHub Actions')
+        
         origin = repo.remote(name="origin")
         origin.set_url(f"https://x-access-token:{github_token}@github.com/roroiii/blog.git")
+
+        # 先執行 pull 操作來同步遠端變更
+        print("Pulling latest changes from remote...")
+        origin.pull('main') 
+
+        # 新增、提交、推送變更
+        repo.index.add([filepath])
+        repo.index.commit(f"Add book excerpt from tweet {tweet_id}")
+        print("Pushing changes to remote...")
         origin.push()
+
         print(f"Successfully pushed tweet {tweet_id} to GitHub")
     except Exception as e:
         print(f"Error committing to GitHub: {e}")
