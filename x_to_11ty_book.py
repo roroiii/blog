@@ -70,14 +70,17 @@ def tweet_to_markdown(tweet):
         filepath = os.path.join(books_dir, filename)
         counter += 1
     
+    first_line = tweet_text.split('\n')[0].strip()
+    remaining_text = '\n'.join(tweet_text.split('\n')[1:]).strip()
+
     content = f"""---
-title: '{tweet_text.split('\n')[0].strip()}'
+title: '{first_line}'
 tags: [hippocampus, book]
 date: '{date_str}'
 image: '/images/books/default-book-cover.webp'
 ---
 
-{tweet_text}
+    {remaining_text}
 
 """
     return filepath, content
