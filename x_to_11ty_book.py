@@ -74,12 +74,14 @@ def tweet_to_markdown(tweet):
     lines = tweet_text.split('\n')
     first_line = lines[0].strip()
     remaining_text = '\n'.join(lines[1:]).strip() if len(lines) > 1 else ""
+    image_match = re.search(r'http\S+', tweet_text)
+    image_url = image_match.group(0) if image_match else '/images/books/default-book-cover.webp'
     
     content = f"""---
 title: '{first_line}'
 tags: [hippocampus, book]
 date: '{date_str}'
-image: '/images/books/default-book-cover.webp'
+image: '{image_url}'
 ---
 
 '{remaining_text}'
