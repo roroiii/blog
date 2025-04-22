@@ -70,9 +70,11 @@ def tweet_to_markdown(tweet):
         filepath = os.path.join(books_dir, filename)
         counter += 1
     
-    first_line = tweet_text.split('\n')[0].strip()
-    remaining_text = '\n'.join(tweet_text.split('\n')[1:]).strip()
-
+    # 預先處理標題和內容
+    lines = tweet_text.split('\n')
+    first_line = lines[0].strip()
+    remaining_text = '\n'.join(lines[1:]).strip() if len(lines) > 1 else ""
+    
     content = f"""---
 title: '{first_line}'
 tags: [hippocampus, book]
@@ -80,7 +82,7 @@ date: '{date_str}'
 image: '/images/books/default-book-cover.webp'
 ---
 
-    {remaining_text}
+{remaining_text}
 
 """
     return filepath, content
