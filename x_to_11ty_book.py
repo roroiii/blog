@@ -21,7 +21,7 @@ github_repo_url = "https://github.com/roroiii/blog.git"
 github_token = os.getenv("GITHUB_TOKEN")  # 使用 GITHUB_TOKEN
 
 # 關鍵字列表
-keywords = ["書摘", "閱讀", "書籍"]
+keywords = ["書摘", "影集"]
 
 # 已處理的推文 ID 記錄（避免重複發佈）
 processed_tweets = set()
@@ -52,7 +52,7 @@ def fetch_tweets():
         user = client.get_me().data
         tweets = client.get_users_tweets(
           id=user.id, 
-          max_results=100, 
+          max_results=3, 
           tweet_fields=["created_at", "text"],
           user_auth=True
         )
@@ -65,7 +65,8 @@ def fetch_tweets():
 def tweet_to_markdown(tweet):
     tweet_text = tweet.text
     tweet_id = tweet.id
-    date_str = datetime.now().strftime("%Y-%m-%d")
+    # Use tweet's creation time instead of current time
+    date_str = tweet.created_at.strftime("%Y-%m-%d")
     filename = f"book-{date_str}.md"
     filepath = os.path.join(books_dir, filename)
     
@@ -81,15 +82,16 @@ def tweet_to_markdown(tweet):
     remaining_text = '\n'.join(lines[1:]).strip() if len(lines) > 1 else ""
     image_match = re.search(r'http\S+', tweet_text)
     image_url = image_match.group(0) if image_match else '/images/books/default-book-cover.webp'
+    tags = ["hippocampus", "book"] if "書摘" in first_line else ["hippocampus", "video"]
     
     content = f"""---
 title: '{first_line}'
-tags: [hippocampus, book]
+tags: {tags}
 date: '{date_str}'
 image: '{image_url}'
 ---
 
-'{remaining_text}'
+{remaining_text}
 
 """
     return filepath, content
@@ -120,9 +122,8 @@ def commit_to_github(repo, filepath, tweet_id):
         repo.index.add([filepath])
         repo.index.commit(f"Add book excerpt from tweet {tweet_id}")
         
-        # 使用 force push 來解決衝突
-        print("Force pushing changes...")
-        origin.push(force=True)
+        print("Pushing changes...")
+        origin.push()
         
         print(f"Successfully pushed tweet {tweet_id} to GitHub")
     except Exception as e:
