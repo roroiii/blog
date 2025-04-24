@@ -31,7 +31,10 @@ processed_tweets_file = os.path.join(repo_path, "processed_tweets.txt")
 def load_processed_tweets():
     if os.path.exists(processed_tweets_file):
         with open(processed_tweets_file, "r") as f:
-            return set(line.strip() for line in f)
+            processed = set(line.strip() for line in f)
+            print(f"Loaded {len(processed)} processed tweet IDs from {processed_tweets_file}")
+            return processed
+    print(f"No processed tweets file found at {processed_tweets_file}")
     return set()
 
 # 儲存已處理的推文 ID
@@ -50,13 +53,20 @@ def fetch_tweets():
             access_token_secret=access_token_secret
         )
         user = client.get_me().data
+        print(f"Authenticated as user: {user.username}")
         tweets = client.get_users_tweets(
-          id=user.id, 
-          max_results=5, 
-          tweet_fields=["created_at", "text"],
-          user_auth=True
+            id=user.id, 
+            max_results=5, 
+            tweet_fields=["created_at", "text"],
+            user_auth=True
         )
-        return tweets.data if tweets.data else []
+        if not tweets.data:
+            print("No tweets found.")
+            return []
+        print(f"Found {len(tweets.data)} tweets:")
+        for tweet in tweets.data:
+            print(f"Tweet ID: {tweet.id}, Text: {tweet.text}")
+        return tweets.data
     except Exception as e:
         print(f"Error fetching tweets: {e}")
         return []
@@ -65,7 +75,6 @@ def fetch_tweets():
 def tweet_to_markdown(tweet):
     tweet_text = tweet.text
     tweet_id = tweet.id
-    # Use tweet's creation time instead of current time
     date_str = tweet.created_at.strftime("%Y-%m-%d")
     filename = f"book-{date_str}.md"
     filepath = os.path.join(books_dir, filename)
@@ -94,6 +103,7 @@ image: '{image_url}'
 {remaining_text}
 
 """
+    print(f"Generated Markdown file: {filepath}")
     return filepath, content
 
 # 提交到 GitHub
@@ -106,6 +116,7 @@ def commit_to_github(repo, filepath, tweet_id):
         # 設定遠端 URL
         origin = repo.remote(name="origin")
         origin.set_url(f"https://x-access-token:{github_token}@github.com/roroiii/blog.git")
+        print(f"Set remote URL with token.")
 
         # 獲取當前分支名稱
         current_branch = repo.active_branch.name
@@ -118,17 +129,19 @@ def commit_to_github(repo, filepath, tweet_id):
         print("Resetting local branch to match remote...")
         repo.git.reset(f"origin/{current_branch}", hard=True)
         
-        # 新增變更
+        # 檢查是否有變更
         repo.index.add([filepath])
-        repo.index.commit(f"Add book excerpt from tweet {tweet_id}")
-        
-        print("Pushing changes...")
-        origin.push()
-        
-        print(f"Successfully pushed tweet {tweet_id} to GitHub")
+        if repo.is_dirty():
+            print(f"Changes detected, committing: {filepath}")
+            repo.index.commit(f"Add book excerpt from tweet {tweet_id}")
+            
+            print("Pushing changes...")
+            origin.push()
+            print(f"Successfully pushed tweet {tweet_id} to GitHub")
+        else:
+            print("No changes to commit.")
     except Exception as e:
         print(f"Error committing to GitHub: {e}")
-        # 印出更詳細的錯誤訊息
         import traceback
         traceback.print_exc()
 
@@ -147,16 +160,29 @@ def process_tweets():
     user = client.get_me().data
     screen_name = user.username
     
+    if not tweets:
+        print("No tweets to process.")
+        return
+    
+    found_matching_tweet = False
     for tweet in tweets:
         if tweet.id not in processed_tweets:
             tweet_text = tweet.text
             if any(keyword.lower() in tweet_text.lower() for keyword in keywords):
+                found_matching_tweet = True
                 print(f"Found matching tweet: {tweet_text}")
                 filepath, content = tweet_to_markdown(tweet)
                 with open(filepath, "w", encoding="utf-8") as f:
                     f.write(content)
                 commit_to_github(repo, filepath, tweet.id)
                 processed_tweets.add(tweet.id)
+            else:
+                print(f"Tweet does not match keywords: {tweet_text}")
+        else:
+            print(f"Tweet already processed: {tweet.id}")
+    
+    if not found_matching_tweet:
+        print("No new tweets matched the keywords.")
     
     save_processed_tweets()
 
