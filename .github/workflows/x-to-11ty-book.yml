@@ -20,8 +20,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install tweepy GitPython
-          pip show tweepy GitPython
+          pip install tweepy
+          pip show tweepy
 
       - name: Run script
         env:
@@ -29,5 +29,17 @@ jobs:
           CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python x_to_11ty_book.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/books/*.md
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Add book excerpts from X tweets"
+            git push origin HEAD
+            echo "Successfully pushed changes to the repository."
+          fi
