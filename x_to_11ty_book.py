@@ -1,5 +1,4 @@
 import tweepy
-import git
 import os
 from datetime import datetime
 import re
@@ -14,11 +13,9 @@ access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
 if not all([consumer_key, consumer_secret, access_token, access_token_secret]):
     raise ValueError("Missing X API credentials. Ensure CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, and ACCESS_TOKEN_SECRET are set in environment variables.")
 
-# GitHub 倉庫設定
+# 路徑設定
 repo_path = "."  # GitHub Actions 運行時在倉庫根目錄
 books_dir = os.path.join(repo_path, "src", "books")  # 書摘目錄
-github_repo_url = "https://github.com/roroiii/blog.git"
-github_token = os.getenv("GITHUB_TOKEN")  # 使用 GITHUB_TOKEN
 
 # 關鍵字列表
 keywords = ["書摘", "影集"]
@@ -106,51 +103,12 @@ image: '{image_url}'
     print(f"Generated Markdown file: {filepath}")
     return filepath, content
 
-# 提交到 GitHub
-def commit_to_github(repo, filepath, tweet_id):
-    try:
-        # 配置 Git 使用者資訊
-        repo.git.config('user.email', 'github-actions[bot]@users.noreply.github.com')
-        repo.git.config('user.name', 'GitHub Actions')
-        
-        # 設定遠端 URL
-        origin = repo.remote(name="origin")
-        origin.set_url(f"https://x-access-token:{github_token}@github.com/roroiii/blog.git")
-        print(f"Set remote URL with token.")
-
-        # 獲取當前分支名稱
-        current_branch = repo.active_branch.name
-        print(f"Current branch: {current_branch}")
-        
-        # 更明確的拉取和合併
-        print("Fetching remote changes...")
-        origin.fetch()
-        
-        print("Resetting local branch to match remote...")
-        repo.git.reset(f"origin/{current_branch}", hard=True)
-        
-        # 檢查是否有變更
-        repo.index.add([filepath])
-        if repo.is_dirty():
-            print(f"Changes detected, committing: {filepath}")
-            repo.index.commit(f"Add book excerpt from tweet {tweet_id}")
-            
-            print("Pushing changes...")
-            origin.push()
-            print(f"Successfully pushed tweet {tweet_id} to GitHub")
-        else:
-            print("No changes to commit.")
-    except Exception as e:
-        print(f"Error committing to GitHub: {e}")
-        import traceback
-        traceback.print_exc()
-
-# 處理推文並更新 blog
+# 處理推文並生成 Markdown 文件
 def process_tweets():
     global processed_tweets
     processed_tweets = load_processed_tweets()
     tweets = fetch_tweets()
-    repo = git.Repo(repo_path)
+    
     client = tweepy.Client(
         consumer_key=consumer_key,
         consumer_secret=consumer_secret,
@@ -174,7 +132,7 @@ def process_tweets():
                 filepath, content = tweet_to_markdown(tweet)
                 with open(filepath, "w", encoding="utf-8") as f:
                     f.write(content)
-                commit_to_github(repo, filepath, tweet.id)
+                print(f"Successfully created file for tweet {tweet.id}: {filepath}")
                 processed_tweets.add(tweet.id)
             else:
                 print(f"Tweet does not match keywords: {tweet_text}")
