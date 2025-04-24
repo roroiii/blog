@@ -52,7 +52,7 @@ def fetch_tweets():
         user = client.get_me().data
         tweets = client.get_users_tweets(
           id=user.id, 
-          max_results=3, 
+          max_results=5, 
           tweet_fields=["created_at", "text"],
           user_auth=True
         )
