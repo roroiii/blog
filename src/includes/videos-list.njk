@@ -20,7 +20,7 @@
             
           <span class="post-list__tags">
             {% for tag in post.data.tags %}
-              {%- if collections.tagList.indexOf(tag) != -1 -%}
+              {%- if collections.tagList.indexOf(tag) != -1 and tag != 'hippocampus'-%}
                   {{ tag }}
               {%- endif -%}
             {% endfor %}

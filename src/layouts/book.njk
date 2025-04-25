@@ -3,26 +3,68 @@ layout: base.njk
 ---
 
 <section class="book">
-
   <h2 class="post-list__heading">腦內的海馬迴</h2>
 
-  <button>書摘</button> ｜<button>影評</button>
+  <button class="category-btn active" data-category="all">全部</button> ｜
+  <button class="category-btn" data-category="book">書摘</button> ｜
+  <button class="category-btn" data-category="video">影評</button>
 
-  {% set hippocampuslist = collections.hippocampus | head(-10) %}
-  {% include "hippocampus-list.njk" %}
+  <div id="all-content" class="category-content active">
+    {% set hippocampuslist = collections.hippocampus %}
+    {% include "hippocampus-list.njk" %}
+  </div>
 
-    {{ content | safe }}
-  {#
-  {% set bookslist = collections.book | head(-10) %}
-  {% include "books-list.njk" %}
+  <div id="book-content" class="category-content">
+    {% set bookslist = collections.book %}
+    {% include "books-list.njk" %}
+  </div>
 
-    {{ content | safe }}
+  <div id="video-content" class="category-content">
+    {% set videoslist = collections.video %}
+    {% include "videos-list.njk" %}
+  </div>
 
-  {% set videoslist = collections.video | head(-10) %}
-  {% include "videos-list.njk" %}
-
-    {{ content | safe }}
-  #}
+  {{ content | safe }}
 </section>
 
+<style>
+  .category-content {
+    display: none;
+  }
+  .category-content.active {
+    display: block;
+  }
+  .category-btn.active {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+</style>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const categoryContents = document.querySelectorAll('.category-content');
+    
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // 移除所有按鈕的active
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        // 當前按鈕的active
+        button.classList.add('active');
+        
+        // 隐藏所有内容
+        categoryContents.forEach(content => content.classList.remove('active'));
+        
+        // 顯示對應的內容
+        const category = button.getAttribute('data-category');
+        if (category === 'all') {
+          document.getElementById('all-content').classList.add('active');
+        } else if (category === 'book') {
+          document.getElementById('book-content').classList.add('active');
+        } else if (category === 'video') {
+          document.getElementById('video-content').classList.add('active');
+        }
+      });
+    });
+  });
+</script>
