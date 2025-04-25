@@ -36,9 +36,14 @@ def load_processed_tweets():
 
 # 儲存已處理的推文 ID
 def save_processed_tweets():
-    with open(processed_tweets_file, "w") as f:
-        for tweet_id in processed_tweets:
-            f.write(f"{tweet_id}\n")
+    print(f"Saving {len(processed_tweets)} processed tweet IDs to {processed_tweets_file}")
+    try:
+        with open(processed_tweets_file, "w") as f:
+            for tweet_id in processed_tweets:
+                f.write(f"{tweet_id}\n")
+        print(f"Successfully saved processed tweet IDs to {processed_tweets_file}")
+    except Exception as e:
+        print(f"Error saving processed tweets to {processed_tweets_file}: {e}")
 
 # 獲取推文（使用 X API v2）
 def fetch_tweets():
