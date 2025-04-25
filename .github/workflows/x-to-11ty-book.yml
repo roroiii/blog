@@ -35,11 +35,11 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/books/*.md
+          git add src/books/*.md processed_tweets.txt
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Add book excerpts from X tweets"
+            git commit -m "Add book excerpts from X tweets and update processed tweets"
             git push origin HEAD
             echo "Successfully pushed changes to the repository."
           fi
