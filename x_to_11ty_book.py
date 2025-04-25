@@ -70,27 +70,36 @@ def fetch_tweets():
 
 # 將推文轉換為 11ty 書摘 Markdown 格式
 def tweet_to_markdown(tweet):
-    tweet_text = tweet.text
-    tweet_id = tweet.id
-    date_str = tweet.created_at.strftime("%Y-%m-%d")
-    filename = f"book-{date_str}.md"
+  tweet_text = tweet.text
+  tweet_id = tweet.id
+  date_str = tweet.created_at.strftime("%Y-%m-%d")
+  
+  # 預先處理標題和內容
+  lines = tweet_text.split('\n')
+  first_line = lines[0].strip()
+  remaining_text = '\n'.join(lines[1:]).strip() if len(lines) > 1 else ""
+  
+  # 根據第一行內容決定檔名前綴
+  if "影集" in first_line:
+    filename_prefix = "video"
+    tags = ["hippocampus", "video"]
+  else:
+    filename_prefix = "book"
+    tags = ["hippocampus", "book"]
+  
+  filename = f"{filename_prefix}-{date_str}.md"
+  filepath = os.path.join(books_dir, filename)
+  
+  counter = 1
+  while os.path.exists(filepath):
+    filename = f"{filename_prefix}-{date_str}-{counter}.md"
     filepath = os.path.join(books_dir, filename)
-    
-    counter = 1
-    while os.path.exists(filepath):
-        filename = f"book-{date_str}-{counter}.md"
-        filepath = os.path.join(books_dir, filename)
-        counter += 1
-    
-    # 預先處理標題和內容
-    lines = tweet_text.split('\n')
-    first_line = lines[0].strip()
-    remaining_text = '\n'.join(lines[1:]).strip() if len(lines) > 1 else ""
-    image_match = re.search(r'http\S+', tweet_text)
-    image_url = image_match.group(0) if image_match else '/images/books/default-book-cover.webp'
-    tags = ["hippocampus", "book"] if "書摘" in first_line else ["hippocampus", "video"]
-    
-    content = f"""---
+    counter += 1
+  
+  image_match = re.search(r'http\S+', tweet_text)
+  image_url = image_match.group(0) if image_match else '/images/books/default-book-cover.webp'
+  
+  content = f"""---
 title: '{first_line}'
 tags: {tags}
 date: '{date_str}'
@@ -100,8 +109,8 @@ image: '{image_url}'
 {remaining_text}
 
 """
-    print(f"Generated Markdown file: {filepath}")
-    return filepath, content
+  print(f"Generated Markdown file: {filepath}")
+  return filepath, content
 
 # 處理推文並生成 Markdown 文件
 def process_tweets():
