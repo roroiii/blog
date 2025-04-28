@@ -26,20 +26,27 @@ processed_tweets_file = os.path.join(repo_path, "processed_tweets.txt")
 
 # 載入已處理的推文 ID
 def load_processed_tweets():
+    processed = set()
     if os.path.exists(processed_tweets_file):
         with open(processed_tweets_file, "r") as f:
-            processed = set(line.strip() for line in f)
-            print(f"Loaded {len(processed)} processed tweet IDs from {processed_tweets_file}")
-            return processed
-    print(f"No processed tweets file found at {processed_tweets_file}")
-    return set()
+            lines = f.readlines()
+            for line in lines:
+                line = line.strip()
+                if line and line.isdigit():  # 確保行不為空且是數字
+                    processed.add(int(line))  # 轉換為整數
+                else:
+                    print(f"Skipping invalid line in {processed_tweets_file}: '{line}'")
+            print(f"Loaded {len(processed)} processed tweet IDs from {processed_tweets_file}: {processed}")
+    else:
+        print(f"No processed tweets file found at {processed_tweets_file}")
+    return processed
 
 # 儲存已處理的推文 ID
 def save_processed_tweets():
-    print(f"Saving {len(processed_tweets)} processed tweet IDs to {processed_tweets_file}")
+    print(f"Saving {len(processed_tweets)} processed tweet IDs to {processed_tweets_file}: {processed_tweets}")
     try:
         with open(processed_tweets_file, "w") as f:
-            for tweet_id in processed_tweets:
+            for tweet_id in sorted(processed_tweets):  # 排序以保持一致性
                 f.write(f"{tweet_id}\n")
         print(f"Successfully saved processed tweet IDs to {processed_tweets_file}")
     except Exception as e:
