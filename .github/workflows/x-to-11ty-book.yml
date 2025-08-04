@@ -2,7 +2,7 @@ name: Update 11ty Book Excerpts with X Tweets
 
 on:
   schedule:
-    - cron: '0 0 */3 * *' # 每3天運行一次
+    - cron: '0 0 */7 * *' # 每7天運行一次
   workflow_dispatch: # 允許手動觸發
 
 jobs:
