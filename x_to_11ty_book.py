@@ -85,6 +85,11 @@ def tweet_to_markdown(tweet):
   tweet_text = tweet.text
   tweet_id = tweet.id
   date_str = tweet.created_at.strftime("%Y-%m-%d")
+  books_cover_array = [
+      "/images/books/default-book-cover.png",
+      "/images/books/default-book-cover-1.jpg",
+      "/images/books/default-book-cover-2.jpg",
+  ]
   
   # 預先處理標題和內容
   lines = tweet_text.split('\n')
@@ -109,7 +114,7 @@ def tweet_to_markdown(tweet):
     counter += 1
   
   image_match = re.search(r'http\S+', tweet_text)
-  image_url = image_match.group(0) if image_match else '/images/books/default-book-cover.webp'
+  image_url = image_match.group(0) if image_match else books_cover_array[tweet_id % len(books_cover_array)]
   
   content = f"""---
 title: '{first_line}'
