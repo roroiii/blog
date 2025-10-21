@@ -5,6 +5,24 @@ layout: base.njk
 
 # R
 
+Date: 2025-10-21
+
+這兩個月在學 ThreeJS 製作 3D 相關的網頁，覺得學 ThreeJS 很像在爬山，很多高高低低起起伏伏。</br>
+以為學會了，又給你來個大魔王，之後又給你嘗點甜頭，就像刻印努力記在腦海裡。
+
+[Threejs-journey](https://threejs-journey.com/) 目前大概懵懵懂懂學了一半，就可以直接應用在工作上。</br>
+但後面的建模特效 Slider 因為工作上不需要，就慢慢學吧。
+
+製作網頁 3D 需要邏輯與美感，那些寫得漂亮的網頁真的會讓人嚮往。
+
+你嚮往的工作是什麼呢？</br>
+
+聽聽看作者的演講吧 [How I Made 1 Million In One Year By Doing What I Like](https://youtu.be/DkLg3fcV308?si=f19G7SGz1Nj2MbLW)
+
+喜歡自己的工作並且發光發熱的人，真的讓人覺得很有魅力呀！
+
+---
+
 Date: 2025-04-15
 
 覺得是幾天前才寫的日記，竟然快過一個月啦！
